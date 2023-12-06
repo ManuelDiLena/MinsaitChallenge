@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { ContainerList } from "../styles/styleList";
 import { IProduct, getProducts } from "../service/products";
+import { Product } from "./Product";
 
 export function List() {
 
@@ -12,18 +14,21 @@ export function List() {
     }, [])
 
     return (
-        <div>
-            <ul>
-                {
-                    products.map((product) => (
-                        <li key={product.id}>
-                            <h3>{product.productName}</h3>
-                            <p>{product.stock}</p>
-                            <p>{product.price}</p>
-                        </li>
-                    ))
-                }
-            </ul>
-        </div>
+        <>
+        <ContainerList>
+            {
+                products.map((product) => (
+                    <Product 
+                        key={product.id}
+                        productName={product.productName}
+                        image={product.image_url}
+                        description={product.productDescription}
+                        stock={product.stock}
+                        price={product.price}
+                    />
+                ))
+            }
+        </ContainerList>
+        </>
     )
 }
