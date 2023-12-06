@@ -4,10 +4,14 @@ import { Cart } from './components/Cart'
 import { List } from "./components/List"
 import { Menu } from "./components/Menu"
 import { IProduct } from './service/products'
+import useToggle from './hooks/useToggle'
+import { Favorites } from './components/Favorites'
 
 function App() {
 
     const [cartItems, setCartItems] = useState<IProduct[]>([])
+    const [favVisible, toggleFav] = useToggle(false)
+    const [favItems, setFavItems] = useState<IProduct[]>([])
 
     // Function to add products to cart
     const addToCart = (product: IProduct) => {
@@ -24,12 +28,29 @@ function App() {
         }
     }
 
+    // Function to add products to favorites
+    const addToFav = (product: IProduct) => {
+        // Check if the product is already in the cart
+        const existProduct = favItems.find((item) => item.id === product.id)
+
+        if (!existProduct) {
+            setFavItems([...favItems, {...product}])
+
+        }
+    }
+
     return (
         <>
-            <Menu />
+            <Menu onHideFav={toggleFav} />
             <div className='container'>
-                <List addToCart={addToCart} />
-                <Cart cartItems={cartItems} setCartItems={setCartItems} />
+                <List addToCart={addToCart} addToFav={addToFav} />
+                {
+                    favVisible 
+                    ? 
+                    <Favorites favItems={favItems} setFavItems={setFavItems} />
+                    :
+                    <Cart cartItems={cartItems} setCartItems={setCartItems} />
+                }
             </div>
         </>
     )

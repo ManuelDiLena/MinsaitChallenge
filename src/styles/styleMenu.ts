@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 
-
 const Navbar = styled.div`
     display: flex;
     justify-content: space-between;
@@ -20,8 +19,19 @@ const Title = styled.h1`
     text-transform: uppercase;
 `
 
+const Btn = styled.span`
+    margin-right: 80px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    color: #ECE7B4;
+    &:hover {
+        transform: scale(1.15);
+    }
+`
 
 export { 
     Navbar,
     Title,
+    Btn,
 }

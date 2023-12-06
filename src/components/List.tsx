@@ -5,9 +5,10 @@ import { Product } from "./Product";
 
 interface ListProps {
     addToCart: (product: IProduct) => void;
+    addToFav: (product: IProduct) => void;
 }
 
-export function List({ addToCart }: ListProps) {
+export function List({ addToCart, addToFav }: ListProps) {
 
     const [products, setProducts] = useState<IProduct[]>([])
 
@@ -30,6 +31,7 @@ export function List({ addToCart }: ListProps) {
                         stock={product.stock}
                         price={product.price}
                         addToCart={() => addToCart(product)}
+                        addToFav={() => addToFav(product)}
                     />
                 ))
             }
