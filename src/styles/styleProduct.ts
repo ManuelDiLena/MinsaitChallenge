@@ -4,7 +4,7 @@ const CardProduct = styled.div`
     background-color: #ECE7B4;
     width: 230px;
     height: 300px;
-    border: 2px solid #323232;
+    border: 2px solid #32502E;
     box-shadow: 4px 4px 5px rgba(0,0,0,0.59);
     border-radius: 5px;
     display: flex;
