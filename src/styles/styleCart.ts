@@ -7,16 +7,21 @@ const ContainerCart = styled.div`
     width: 20%;
     height: 87vh;
     padding: 5px;
+
+    @media (max-width: 450px) {
+        width: 100%;
+    }
 `
+
 const CheckoutBtn = styled.button`
     width: 100%;
     padding: 10px 0 10px 0;
+    margin-bottom: 3px;
     background-color: #406343;
     color: #ECE7B4;
     font-size: 16px;
     border-radius: 5px;
     box-shadow: 4px 4px 5px rgba(0,0,0,0.59);
-    margin-bottom: 3px;
     cursor: pointer;
     letter-spacing: 3px;
     line-height: 1;

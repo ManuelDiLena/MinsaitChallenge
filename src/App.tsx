@@ -10,6 +10,7 @@ import { Favorites } from './components/Favorites'
 function App() {
 
     const [cartItems, setCartItems] = useState<IProduct[]>([])
+    const [cartVisible, toggleCart] = useToggle(true)
     const [favVisible, toggleFav] = useToggle(false)
     const [favItems, setFavItems] = useState<IProduct[]>([])
 
@@ -41,15 +42,21 @@ function App() {
 
     return (
         <>
-            <Menu onHideFav={toggleFav} />
+            <Menu 
+                onHideCart={toggleCart}
+                onHideFav={toggleFav} 
+            />
             <div className='container'>
                 <List addToCart={addToCart} addToFav={addToFav} />
                 {
-                    favVisible 
-                    ? 
-                    <Favorites favItems={favItems} setFavItems={setFavItems} />
-                    :
-                    <Cart cartItems={cartItems} setCartItems={setCartItems} />
+                    cartVisible && (
+                        favVisible ? 
+                        (
+                            <Favorites favItems={favItems} setFavItems={setFavItems} />
+                        ) : (
+                            <Cart cartItems={cartItems} setCartItems={setCartItems} />
+                        )
+                    )
                 }
             </div>
         </>

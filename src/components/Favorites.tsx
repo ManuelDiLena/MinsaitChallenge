@@ -9,6 +9,7 @@ interface FavProps {
 
 export function Favorites({ favItems, setFavItems }: FavProps) {
 
+    // Function to remove products from favorites list
     const deleteItemFav = (item: IProduct) => {
         const updatedFav = favItems.filter((favItem) => favItem.id !== item.id)
         setFavItems(updatedFav)
