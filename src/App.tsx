@@ -1,9 +1,11 @@
+import './App.css'
 import { List } from "./components/List"
+import { Menu } from "./components/Menu"
 
 function App() {
     return (
         <>
-            <div>Hola Mundo</div>
+            <Menu />
             <List />
         </>
     )
