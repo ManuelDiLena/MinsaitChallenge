@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { Cart } from './components/Cart'
 import { List } from "./components/List"
@@ -10,9 +10,28 @@ import { Favorites } from './components/Favorites'
 function App() {
 
     const [cartItems, setCartItems] = useState<IProduct[]>([])
-    const [cartVisible, toggleCart] = useToggle(true)
+    const [cartVisible, toggleCart] = useToggle(false)
+    const [mobileScreen, toggleMobileScreen] = useToggle(false)
     const [favVisible, toggleFav] = useToggle(false)
     const [favItems, setFavItems] = useState<IProduct[]>([])
+    const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth)
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth)
+        }
+
+        window.addEventListener('resize', handleResize)
+
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
+
+    const showFullScreenCart = () => {
+        toggleMobileScreen()
+        toggleCart()
+    }
 
     // Function to add products to cart
     const addToCart = (product: IProduct) => {
@@ -36,25 +55,59 @@ function App() {
 
         if (!existProduct) {
             setFavItems([...favItems, {...product}])
-
         }
     }
 
     return (
         <>
             <Menu 
-                onHideCart={toggleCart}
+                onHideCart={mobileScreen ? showFullScreenCart : toggleCart}
                 onHideFav={toggleFav} 
             />
             <div className='container'>
-                <List addToCart={addToCart} addToFav={addToFav} />
                 {
-                    cartVisible && (
-                        favVisible ? 
-                        (
-                            <Favorites favItems={favItems} setFavItems={setFavItems} />
+                    windowWidth > 450 && (
+                        favVisible ? (
+                            <>
+                            <List 
+                                addToCart={addToCart}
+                                addToFav={addToFav}
+                            />
+                            <Favorites 
+                                favItems={favItems}
+                                setFavItems={setFavItems}
+                            />
+                            </>
                         ) : (
-                            <Cart cartItems={cartItems} setCartItems={setCartItems} />
+                            <>
+                            <List 
+                                addToCart={addToCart}
+                                addToFav={addToFav}
+                            />
+                            <Cart 
+                                cartItems={cartItems}
+                                setCartItems={setCartItems}
+                            />
+                            </>
+                        )
+                    )
+                }
+                {
+                    windowWidth < 450 && (
+                        cartVisible ? (
+                            <>
+                                <Cart 
+                                    cartItems={cartItems}
+                                    setCartItems={setCartItems}
+                                />
+                            </>
+                        ) : (
+                            <>
+                                <List 
+                                    addToCart={addToCart}
+                                    addToFav={addToFav}
+                                />
+                            </>
                         )
                     )
                 }
