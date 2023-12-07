@@ -20,7 +20,7 @@ export function Favorites({ favItems, setFavItems }: FavProps) {
             <TitleFav>Favorites</TitleFav>
             {
                 favItems.map((item) => (
-                    <ItemFav key={item.id}>
+                    <ItemFav id='itemFav' key={item.id}>
                         <FavInfo>
                             <h3>{item.productName}</h3>
                         </FavInfo>

@@ -11,10 +11,10 @@ export function Menu({ onHideCart, onHideFav }: MenuProps) {
         <Navbar>
             <Title>Test Challenge</Title>
             <BtnsMenu>
-                <Btn onClick={onHideCart}>
+                <Btn id='btnMenuCart' onClick={onHideCart}>
                     <CiShoppingCart />
                 </Btn>
-                <Btn onClick={onHideFav}>
+                <Btn id='btnMenuFav' onClick={onHideFav}>
                     <CiHeart />
                 </Btn>
             </BtnsMenu>

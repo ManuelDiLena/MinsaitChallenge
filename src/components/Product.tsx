@@ -27,8 +27,8 @@ export function Product({ productName, image, stock, price, addToCart, addToFav 
             <FooterSection>
                 <p>Stock: {stock}</p>
                 <BtnSection>
-                    <Btn onClick={addToFav}><CiHeart /></Btn>
-                    <Btn onClick={addToCart}><CiShoppingCart /></Btn>
+                    <Btn id='btnFav' onClick={addToFav}><CiHeart /></Btn>
+                    <Btn id='btnCart' onClick={addToCart}><CiShoppingCart /></Btn>
                 </BtnSection>
             </FooterSection>
         </CardProduct>

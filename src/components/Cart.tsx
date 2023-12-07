@@ -36,7 +36,7 @@ export function Cart({ cartItems, setCartItems }: CartProps) {
             <CheckoutBtn>Checkout $ {total}</CheckoutBtn>
             {
                 cartItems.map((item) => (
-                    <ItemCart key={item.id}>
+                    <ItemCart id='itemCart' key={item.id}>
                         <ItemInfo>
                             <h3>{item.productName}</h3>
                             <p>${item.price}</p>
